@@ -1,0 +1,86 @@
+<div *ngIf="temp!='1'">
+       <router-outlet (activate)="onActivate($event)"></router-outlet>
+</div>
+<div class="container-fluid" *ngIf="temp=='1'">
+       <div class="row" style="height: 10vh;">
+              <div class="col-lg-2">
+                     <p style="font-size: 40px;"><img src="assets/images/logo.png" style="height:60px;width:70%"></p>
+                     <!-- <h3>digiLMS</h3> -->
+              </div>
+              <div class="col-lg-8">
+                     <marquee style="color: red;padding-top: 2%;" *ngIf="languageid==6">Veuillez nous appeler au +212 522446145 si vous avez besoin d'aide.</marquee>
+                     <marquee style="color: red;padding-top: 2%;" *ngIf="languageid==1">Please call us on +212 522446145 if you need assistance.</marquee>
+              </div>
+              <div class="col-lg-2">
+                     <img src="assets/images/logout.png" (click)="logout()" title="{{labels[0].logout}}" style="float: right;padding-right: 1%; padding-top: 5%;margin-right: 18%;">
+                     <!-- <img src="assets/images/notification.png"  *ngIf="userid!=undefined" routerLink="/Messages"
+                       style="float: right;padding-right: 1%;padding-top: 15px;width: 4%;margin-right: 2%;"> -->
+              </div>`
+       </div>
+       <div class="row" *ngIf="isDescktopResolution==true">
+              <div class="col-lg-2" style="overflow-y: auto;height: 90vh;width: 30vh;">
+                     <app-sidebar></app-sidebar>
+              </div>
+              <div class="col-lg-10" style="overflow-y: auto;height: 90vh;background-color: lightgray;">
+                     <router-outlet (activate)="onActivate($event)"></router-outlet><br>
+              </div>
+       </div>
+
+
+       <div class="row" style="height: 20vh;" *ngIf="isMobileResolution==true">
+              <div class="col-lg-12">
+                     <!-- <div class="col-lg-2">
+                            <p style="font-size: 40px;"><img src="assets/images/logo.png" style="height:60px;width:70%"></p>
+                          
+                     </div>
+                     <div class="col-lg-10">
+                            <img src="assets/images/logout.png" (click)="logout()" title="Logout"
+                                   style="float: right;padding-right: 1%;padding-top: 1%;width: 5%;margin-right: 2%;">
+                           
+                     </div> -->
+              </div>
+       </div>
+
+       <div class="row" *ngIf="isMobileResolution==true">
+              <!-- <div class="col-md-2" style="overflow-y: auto;height: 90vh;">
+                     <h6 style="float: left;color: aliceblue;margin-top: 3px;">
+                            Welcome, {{username}}
+                     </h6>
+                     <br />
+                     <hr style="color: aliceblue;border: solid 1px;" />
+              
+                     <a routerLink="/Hospital" *ngIf="roleid=='1'">
+                            &nbsp; Hospital
+                     </a>
+                     <a routerLink="/Clinics" *ngIf="roleid=='2'">
+                            &nbsp; Clinics
+                     </a>
+                     <a routerLink="/IndependentDocotor" *ngIf="roleid=='3'">
+                            &nbsp; Doctor
+                     </a>
+                     <a routerLink="/IndependentNurseComponent" *ngIf="roleid=='4'">
+                            &nbsp; Nurse
+                     </a>
+                     <a routerLink="/IndependentPhysio" *ngIf="roleid=='5'">
+                            &nbsp; Physiotherapist
+                     </a>
+                     <a routerLink="/IndependenMidwife" *ngIf="roleid=='6'">
+                            &nbsp; Midwife
+                     </a>
+
+                    
+              </div> -->
+              <div class="col-lg-10">
+                     <router-outlet (activate)="onActivate($event)"></router-outlet><br>
+              </div>
+       </div>
+
+
+       <!-- <div class="container-fluid" *ngIf="temp!='1'">
+       <div class="row">
+           <div class="col-lg-12">
+               <router-outlet></router-outlet>
+           </div>
+       </div>
+   </div> -->
+</div>

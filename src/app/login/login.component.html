@@ -1,0 +1,49 @@
+<div class="container-fluid bg" style="background-color: black;height: 100vh;">
+       <form #loginForm="ngForm">
+              <div class="row">
+                     <div class="col-lg-1"></div>
+                     <div class="col-lg-4"
+                            style="text-align: center;background-color: #322b6b;margin-top: 8%;border-radius:20px">
+                            <br>
+                            <br>
+                            <!-- <p style="font-size: 40px;"><img src="assets/images/logo.png"></p> -->
+                            <!-- <p style="font-size: 16px;font-weight: 500;color: white;">LOGIN TO YOUR ACCOUNT</p>
+                    
+                     <h2 style="color: white;">Voiladoc</h2> -->
+                            <h3
+                                   style="border-radius: 10px;padding-top: 3%;height:100px;width:83%;background-color: white;color: white;margin-left: 41px;">
+                                   <img src="assets/images/logo.png" style="margin-top:2px;">
+                            </h3>
+                            <br>
+                            <div class="row">
+                                   <div class="col-lg-1"></div>
+                                   <div class="col-lg-10">
+                                          <div>
+                                                 <select class="form-control" style="height:40px;"
+                                                        (change)="GetLanguageID($event)">
+                                                        <option value="" selected>Select Language</option>
+                                                        <option *ngFor="let lang of languagelist" value={{lang.id}}>
+                                                               {{lang.languageName}}</option>
+                                                 </select>
+                                          </div>
+                                          <br>
+                                          <div *ngIf="LanguageID!=undefined">
+                                                 <input type="text" class="form-control" required
+                                                 placeholder="{{labels[0].userName}}" [(ngModel)]="uname" name="uname" /><br>
+                                                 <input type="password" class="form-control" required
+                                                 placeholder="{{labels[0].password}}" [(ngModel)]="password"
+                                                        name="password" /><br>
+                                                 <button type="submit" class="loginbtn"
+                                                        style="background-color: #9ec3cc;" (click)="login()"
+                                                        [disabled]="loginForm.form.invalid">{{labels[0].login}}</button>
+                                                 <br><br>
+                                                 <br>
+                                          </div>
+                                   </div>
+                                   <div class="col-lg-1"></div>
+                            </div><br>
+                     </div><br>
+                     <div class="col-lg-4"></div>
+              </div>
+       </form>
+</div>

@@ -1,0 +1,423 @@
+<br>
+<div class="container-fluid maindiv">
+    <form #doctorform="ngForm">
+        <div class="row headdiv">
+            <div class="col-lg-12">
+                <h4 style="float: left;">{{labels[0].doctorRegistration}}</h4>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+
+            <div class="col-lg-3">
+                <label>{{labels[0].doctorName}} : </label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" required placeholder="{{labels[0].doctorName}}"
+                    [(ngModel)]="doctorname" name="doctorname">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label> {{labels[0].phoneNo}} : </label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" required placeholder="{{labels[0].phoneNo}}"
+                    onkeypress='return(event.charCode>=48&&event.charCode<=57)' [(ngModel)]="phoneno" name="phoneno">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].email}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <!-- <textarea rows="3" required class="form-control" placeholder="Contact Person Name"></textarea> -->
+                <input type="text" class="form-control" required placeholder="{{labels[0].email}}" [(ngModel)]="email"
+                    name="email">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].gender}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <input type="radio" [(ngModel)]="gender" required name="gender" value="1"> {{labels[0].male}} &nbsp;
+                <input type="radio" [(ngModel)]="gender" required name="gender" value="2"> {{labels[0].female}}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].address}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <textarea rows="4" class="form-control" required placeholder="{{labels[0].address}}"
+                    [(ngModel)]="Address" name="Address"></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].speaklanguages}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" required placeholder="{{labels[0].speaklanguages}}"
+                    [(ngModel)]="speaklanguages" name="speaklanguages">
+            </div>
+        </div> <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label class="DEPARTMENT_label">{{labels[0].department}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetDepartmentID($event)" required>
+                    <option value="0" selected>{{labels[0].select}}</option>
+                    <option *ngFor="let department of departmentlist" value={{department.id}}>
+                        {{department.departmentname}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].specialization}} :</label>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetSpecilizationID($event)">
+                    <option value="" selected>{{labels[0].select}}</option>
+                    <option *ngFor="let list of specilaizationlist" value="{{list.id}}">{{list.name}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].country}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetCountryID($event)">
+                    <option value="" selected>{{labels[0].select}}</option>
+                    <option *ngFor="let list of countrylist" value="{{list.id}}">{{list.short}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].province}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetProviceID($event)">
+                    <option value="" selected>{{labels[0].select}}</option>
+                    <option *ngFor="let list of provicelist" value="{{list.id}}">{{list.short}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].city}}</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetCityID($event)">
+                    <option value="" selected>{{labels[0].select}}</option>
+                    <option *ngFor="let list of citylist" value="{{list.id}}">{{list.short}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].slotDuration}} : </label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetSlotDurationID($event)">
+                    <option value="" selected>{{labels[0].select}}</option>
+                    <option value="1">15 Minutes</option>
+                    <option value="2">30 Minutes</option>
+                    <option value="3">45 Minutes</option>
+                    <option value="5">1 Hours</option>
+                </select>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].doctorType}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetDoctorTypeID($event)">
+                    <option value="" selected>{{labels[0].select}}</option>
+                    <option *ngFor="let list of doctortypelist" value="{{list.id}}">{{list.type}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].mallpractiece}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <input type="radio" id="malpractice" name="malpractice" [(ngModel)]="malpractice" value="1">
+                {{labels[0].yes}} &nbsp; &nbsp;
+                <input type="radio" id="malpractice" name="malpractice" [(ngModel)]="malpractice" value="0">
+                {{labels[0].no}} &nbsp; &nbsp;
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].referred}} :</label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <input type="radio" id="reffereddoctor" name="reffereddoctor" [(ngModel)]="reffereddoctor" value="1">
+                {{labels[0].yes}} &nbsp; &nbsp;
+                <input type="radio" id="reffereddoctor" name="reffereddoctor" [(ngModel)]="reffereddoctor" value="0">
+                {{labels[0].no}} &nbsp; &nbsp;
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].photo}} : </label>
+                <span style="color: red;">*</span>
+            </div>
+            <div class="col-lg-4">
+                <ngx-dropzone [multiple]="false" style="height:100%" class="dropzone_vendorinvoice"
+                    (change)="DoctorPhotoUpload($event)">
+                    <ngx-dropzone-label *ngIf="languageid=='1'">Upload file</ngx-dropzone-label>
+                    <ngx-dropzone-label *ngIf="languageid=='6'">Télécharger des fichiers</ngx-dropzone-label>
+                </ngx-dropzone>
+
+            </div>
+            <div class="col-lg-1">
+                <span *ngIf="showdocphoto!=undefined">
+                    <img src="{{showdocphoto}}" style="height:50px;width:70px">&nbsp;
+                </span>
+            </div>
+            <div class="col-lg-4 specforimg">
+                <p>
+                    {{labels[0].images}}
+                </p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].signaturePhoto}} : </label>
+            </div>
+            <div class="col-lg-4">
+                <ngx-dropzone [multiple]="false" style="height:100%" class="dropzone_vendorinvoice"
+                    (change)="sinatureupload($event)">
+                    <ngx-dropzone-label *ngIf="languageid=='1'">Upload file</ngx-dropzone-label>
+                    <ngx-dropzone-label *ngIf="languageid=='6'">Télécharger des fichiers</ngx-dropzone-label>
+                </ngx-dropzone>
+
+            </div>
+            <div class="col-lg-1">
+                <span *ngIf="showsigphoto!=undefined">
+                    <img src="{{showsigphoto}}" style="height:50px;width:70px">&nbsp;
+                </span>
+            </div>
+            <div class="col-lg-4 specforimg">
+                <p>
+                    {{labels[0].images}}
+                </p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label *ngIf="languageid=='1'">Hospital/Clinic/Independent doctor :</label>
+                <label *ngIf="languageid=='6'">Hôpital/Clinique/Médecin indépendant : </label>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetHospitalClinicID($event)">
+                    <option value="" selected>{{labels[0].selectHospitaldrop}}</option>
+                    <option *ngFor="let list of hospitallist" value="{{list.id}}">{{list.hospital_ClinicName}}</option>
+                </select>
+                <!-- <ng-multiselect-dropdown   [data]="hospitallist"
+                    [settings]="hospitadd" (onSelect)="GetHospitalClinicID($event)">
+                  </ng-multiselect-dropdown> -->
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-10" style="text-align: center;">
+                <h4 style="font-weight: 700;">{{labels[0].madicalRegistration}}</h4>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].registrationNo}} : </label>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control"  placeholder="{{labels[0].registrationNo}}"
+                    [(ngModel)]="regno" name="regno">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].registrationCouncil}} : </label>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control"  placeholder="{{labels[0].registrationCouncil}}"
+                    [(ngModel)]="regcouncil" name="regcouncil">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].medicalRegistrationProof}} :</label>
+            </div>
+            <div class="col-lg-4">
+                <ngx-dropzone [multiple]="false" style="height:100%" class="dropzone_vendorinvoice"
+                    (change)="onmecicalregproof($event)">
+                    <ngx-dropzone-label *ngIf="languageid=='1'">Upload file</ngx-dropzone-label>
+                    <ngx-dropzone-label *ngIf="languageid=='6'">Télécharger des fichiers</ngx-dropzone-label>
+                </ngx-dropzone>
+            </div>
+            <div class="col-lg-1">
+                <span *ngIf="showmedicalproof!=undefined">
+                    <img src="{{showmedicalproof}}" style="height:50px;width:70px">&nbsp;
+                </span>
+            </div>
+            <div class="col-lg-4 specforimg">
+                <p>
+                    {{labels[0].images}}
+                </p>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-10" style="text-align: center;">
+                <h4 style="font-weight: 700;" *ngIf="languageid=='1'">PROFESSIONAL PROFILE </h4>
+                <h4 style="font-weight: 700;" *ngIf="languageid=='6'">PROFIL PROFESSIONNEL</h4>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].identityProof}} : </label>
+            </div>
+            <div class="col-lg-4">
+                <ngx-dropzone [multiple]="false" style="height:100%" class="dropzone_vendorinvoice"
+                    (change)="onIdentityProofUpload($event)">
+                    <ngx-dropzone-label *ngIf="languageid=='1'">Upload file</ngx-dropzone-label>
+                    <ngx-dropzone-label *ngIf="languageid=='6'">Télécharger des fichiers</ngx-dropzone-label>
+                </ngx-dropzone>
+            </div>
+            <div class="col-lg-1">
+                <span *ngIf="showidentityphoto!=undefined">
+                    <img src="{{showidentityphoto}}" style="height:50px;width:70px">&nbsp;
+                </span>
+            </div>
+            <div class="col-lg-4 specforimg">
+                <p>
+                    {{labels[0].images}}
+                </p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].degree}} : </label>
+            </div>
+            <div class="col-lg-4">
+                <select class="form-control" (change)="GetDegreeID($event)">
+                    <option value="" selected>{{labels[0].select}}</option>
+                    <option *ngFor="let list of degreemaster" value="{{list.id}}">{{list.short}}</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].college}} : </label>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" placeholder="{{labels[0].college}}" [(ngModel)]="colleagename"
+                    name="colleagename">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].experience}} :</label>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" placeholder="{{labels[0].experience}}" [(ngModel)]="experience"
+                    name="experience">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].otherExperiences}} :</label>
+            </div>
+            <div class="col-lg-4">
+                <textarea rows="4" class="form-control" required placeholder="{{labels[0].otherExperiences}} "
+                    [(ngModel)]="otherexperiences" name="otherexperiences"></textarea>
+
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>{{labels[0].resume}} :</label>
+            </div>
+            <div class="col-lg-4">
+                <ngx-dropzone [multiple]="false" style="height:100%" class="dropzone_vendorinvoice"
+                    (change)="OnUploadResume($event)">
+                    <ngx-dropzone-label *ngIf="languageid=='1'">Upload file</ngx-dropzone-label>
+                    <ngx-dropzone-label *ngIf="languageid=='6'">Télécharger des fichiers</ngx-dropzone-label>
+                </ngx-dropzone>
+              
+            </div>
+            <div class="col-lg-1"> 
+                <span *ngIf="showressume!=undefined">
+                    <img src="{{showressume}}" style="height:50px;width:70px">&nbsp;
+                </span>
+            </div>
+            <div class="col-lg-4 specforimg">
+                <p>
+                    {{labels[0].images}}
+                </p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-2">
+                <button type="button" class="addnewbtns" style="width: 100%;" [disabled]="doctorform.form.invalid"
+                    (click)="InsertedDetails()">{{labels[0].save}} </button>
+            </div>
+            <div class="col-lg-5"></div>
+        </div>
+    </form>
+</div>
+<br>

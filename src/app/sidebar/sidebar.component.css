@@ -1,0 +1,35 @@
+.sidenav {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #322b6b;
+    overflow-x: hidden;
+    padding-top: 10px;
+    margin-top: 10vh;;
+  }
+  
+  .sidenav a {
+    padding: 3px 0px 9px 0px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #f9fbf9;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #ffa800;
+    cursor: pointer;
+  }
+  
+  .togglebtn{
+   /* background-color: #343536; */
+   border: none;
+   color: aliceblue;
+   font-size: 15px;
+   padding-left: 7%;
+   width: 100%;
+   text-align: left;
+  }

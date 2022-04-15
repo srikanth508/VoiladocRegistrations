@@ -1,0 +1,221 @@
+<br>
+<div class="container-fluid maindiv">
+    <form #DiaForm="ngForm">
+    <div class="row headdiv">
+        <div class="col-lg-12">
+            <h4 style="float: left;">{{labels[0].pharmacy}}</h4>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].pharmacyname}} : </label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="text" class="form-control" required [(ngModel)]="pharmacyname" name="pharmacyname"
+                placeholder="{{labels[0].pharmacyname}}">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].contactPersonName}} : </label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="text" class="form-control" required  [(ngModel)]="contactpersoname" name="contactpersoname"
+                placeholder="{{labels[0].contactPersonName}}">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].phoneNo}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="text" class="form-control" required [(ngModel)]="contatcpersonphoneno"   onkeypress='return(event.charCode>=48&&event.charCode<=57)' name="contatcpersonphoneno"
+                placeholder="{{labels[0].phoneNo}}">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].licenseNumber}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="text" class="form-control"  required [(ngModel)]="licenceno" name="licenceno"
+                placeholder="{{labels[0].licenseNumber}}">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].licenseValidTill}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="date" class="form-control"  required [(ngModel)]="licencevalidtill" name="licencevalidtill"
+            >
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].email}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="text" class="form-control" required placeholder="{{labels[0].email}}" [(ngModel)]="emailid" name="emailid">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].country}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <select class="form-control" (change)="GetCountryID($event)">
+                <option value="" selected>{{labels[0].selectt}}</option>
+                <option *ngFor="let list of countrylist" value="{{list.id}}">{{list.short}}</option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].province}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <select class="form-control" (change)="GetProviceID($event)">
+                <option value="" selected>{{labels[0].selectt}}</option>
+                <option *ngFor="let list of provicelist" value="{{list.id}}">{{list.short}}</option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].city}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <select class="form-control" (change)="GetCityID($event)">
+                <option value="" selected>{{labels[0].selectt}}</option>
+                <option *ngFor="let list of citylist" value="{{list.id}}">{{list.short}}</option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].homeDelivery}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="radio" [(ngModel)]="homedelivery" name="homedelivery" value="0"> {{labels[0].no}} &nbsp;
+            <input type="radio" [(ngModel)]="homedelivery" name="homedelivery" value="1"> {{labels[0].yes}}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].nightPharmacy}} ; </label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="radio" [(ngModel)]="nightpharmacy" name="nightpharmacy" value="0"> {{labels[0].no}} &nbsp;
+            <input type="radio" [(ngModel)]="nightpharmacy" name="nightpharmacy" value="1"> {{labels[0].yes}}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].teleOrdering}} :  </label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="radio" [(ngModel)]="teleordering" name="teleordering" value="0"> {{labels[0].no}} &nbsp;
+            <input type="radio" [(ngModel)]="teleordering" name="teleordering" value="1"> {{labels[0].yes}}
+        </div>
+    </div>
+    <br>
+   
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].address}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <textarea rows="4" class="form-control" required placeholder="{{labels[0].address}}" [(ngModel)]="address"
+                name="address"></textarea>
+        </div>
+    </div>
+    <br>
+   
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].description}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <textarea rows="4" class="form-control"  required placeholder="{{labels[0].description}}" [(ngModel)]="description"
+                name="description"></textarea>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].website}} :</label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <input type="text" class="form-control" required placeholder="{{labels[0].website}}" [(ngModel)]="website" name="website">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-3">
+            <label>{{labels[0].pharmacyPhotos}} : </label>
+            <span style="color: red;">*</span>
+        </div>
+        <div class="col-lg-4">
+            <ngx-dropzone [multiple]="false" (change)="onphotoUpload($event)" style="height:100%"
+                class="dropzone_vendorinvoice">
+                <ngx-dropzone-label *ngIf="languageid=='1'">Upload file</ngx-dropzone-label>
+                <ngx-dropzone-label *ngIf="languageid=='6'">Télécharger des fichiers</ngx-dropzone-label>
+            </ngx-dropzone>
+           
+        </div>
+        <div class="col-lg-1">
+            <span *ngIf="showphoto!=undefined">
+                <img src="{{showphoto}}" style="height:50px;width:70px">&nbsp;
+            </span>
+        </div>
+        <div class="col-lg-4 specforimg" *ngIf="languageid=='1'">
+            <p>
+              NOTE :Image size should be less than <b>1MB</b> and accepted only in <b>JPG , PNG and JPEG</b> formats.
+            </p>
+          </div>
+          <div class="col-lg-4 specforimg" *ngIf="languageid=='6'">
+            <p>
+              REMARQUE: la taille de l'image doit être inférieure à <b> 1 Mo </b> et acceptée uniquement aux formats <b> JPG, PNG et JPEG </b>.
+            </p>
+          </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-2">
+            <button type="button" class="addnewbtns" style="width: 100%;" [disabled]="DiaForm.form.invalid" (click)="Insertdetails()">Save</button>
+
+        </div>
+        <div class="col-lg-5"></div>
+    </div>
+</form>
+</div>
+<br>

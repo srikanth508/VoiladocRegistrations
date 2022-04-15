@@ -1,0 +1,44 @@
+<div class="row">
+       <div class="col-md-2 sidenav" style="overflow-y: auto;height: 90vh;">
+              <h6 style="float: left;color: aliceblue;margin-top: 3px;">
+                     {{labels[0].welcome}}, {{username}}
+              </h6>
+              <br />
+              <hr style="color: aliceblue;border: solid 1px;" />
+              <!-- <a routerLink="/TraingingCategoryDash" *ngIf="roleid=='1'">
+                     &nbsp; Training Category
+              </a>
+              <a routerLink="/Trainingsubcategorydash" *ngIf="roleid=='1'">
+                     &nbsp; Training Sub Category
+              </a>
+              <a routerLink="/CourseDash" *ngIf="roleid=='1'">
+                     &nbsp; Course
+              </a>
+              <a routerLink="/CourseChaptersDash" *ngIf="roleid=='1'">
+                     &nbsp; Course Chapters
+              </a> -->
+              <a routerLink="/Hospital" *ngIf="roleid=='1'">
+                     &nbsp; {{labels[0].hospital}}
+              </a>
+              <a routerLink="/Clinics" *ngIf="roleid=='2'">
+                     &nbsp; {{labels[0].clinic}}
+              </a>
+              <a routerLink="/IndependentDocotor" *ngIf="roleid=='3'">
+                     &nbsp; {{labels[0].doctor}}
+              </a>
+              <a routerLink="/IndependentNurseComponent" *ngIf="roleid=='4'">
+                     &nbsp; {{labels[0].nurse}}
+              </a>
+              <a routerLink="/IndependentPhysio" *ngIf="roleid=='5'">
+                     &nbsp; {{labels[0].physiotherapist}}
+              </a>
+              <a routerLink="/IndependenMidwife" *ngIf="roleid=='6'">
+                     &nbsp; {{labels[0].midwife}}
+              </a>
+              <a routerLink="/Pharmacy" *ngIf="roleid=='7'">
+                     &nbsp; {{labels[0].pharmacy}}
+              </a>
+              <a routerLink="/DiagnosticCenter" *ngIf="roleid=='8'">
+                     &nbsp; {{labels[0].diagnostic}}
+              </a>
+       </div>
