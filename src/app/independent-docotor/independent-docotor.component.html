@@ -24,9 +24,33 @@
                 <label> {{labels[0].phoneNo}} : </label>
                 <span style="color: red;">*</span>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-1">
+                <select class="form-control" (change)="GetTypeID($event)"
+                    [(ngModel)]="codeid" name="codeid">
+                    <option value="0">Select</option>
+                    <option value="+1">+1 USA</option>
+                    <option value="+33">+33 France</option>
+                    <option value="+39">+39 Italy</option>
+                    <option value="+34">+34 Spain</option>
+                    <option value="+49">+49 Germany</option>
+                    <option value="+31">+31 Netherlands</option>
+                    <option value="+32">+32 Belgium</option>
+                    <option value="+972">+972 Israel</option>
+                    <option value="+65">+65 Singapore</option>
+                    <option value="+212">+212 Maroc</option>
+                    <option value="+91">+91 India</option>
+                    <option value="+44">+44 UK</option>
+                    <option value="+961">+961 Lebanon</option>
+                    <option value="+229">+229 Benin</option>
+                    <option value="+221">+221 Senegal</option>
+                    <option value="+261">+261 Madagascar</option>
+                    <option value="+230">+230 Mauritius</option>
+                    <option value="+262">+262 Reunion</option>
+                </select>
+            </div>
+            <div class="col-lg-3">
                 <input type="text" class="form-control" required placeholder="{{labels[0].phoneNo}}"
-                    onkeypress='return(event.charCode>=48&&event.charCode<=57)' [(ngModel)]="phoneno" name="phoneno">
+                    onkeypress='return(event.charCode>=48&&event.charCode<=57)' maxlength="12" [(ngModel)]="phoneno" name="phoneno">
             </div>
         </div>
         <br>
@@ -274,8 +298,8 @@
                 <label>{{labels[0].registrationNo}} : </label>
             </div>
             <div class="col-lg-4">
-                <input type="text" class="form-control"  placeholder="{{labels[0].registrationNo}}"
-                    [(ngModel)]="regno" name="regno">
+                <input type="text" class="form-control" placeholder="{{labels[0].registrationNo}}" [(ngModel)]="regno"
+                    name="regno">
             </div>
         </div>
         <br>
@@ -284,7 +308,7 @@
                 <label>{{labels[0].registrationCouncil}} : </label>
             </div>
             <div class="col-lg-4">
-                <input type="text" class="form-control"  placeholder="{{labels[0].registrationCouncil}}"
+                <input type="text" class="form-control" placeholder="{{labels[0].registrationCouncil}}"
                     [(ngModel)]="regcouncil" name="regcouncil">
             </div>
         </div>
@@ -396,9 +420,9 @@
                     <ngx-dropzone-label *ngIf="languageid=='1'">Upload file</ngx-dropzone-label>
                     <ngx-dropzone-label *ngIf="languageid=='6'">Télécharger des fichiers</ngx-dropzone-label>
                 </ngx-dropzone>
-              
+
             </div>
-            <div class="col-lg-1"> 
+            <div class="col-lg-1">
                 <span *ngIf="showressume!=undefined">
                     <img src="{{showressume}}" style="height:50px;width:70px">&nbsp;
                 </span>
