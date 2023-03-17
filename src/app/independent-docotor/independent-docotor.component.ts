@@ -59,6 +59,7 @@ export class IndependentDocotorComponent implements OnInit {
     this.GetCountry(this.languageid);
     this.GetDegreeMaster(this.languageid);
     this.getlanguage();
+    this.codeid = 0;
   }
 
 
@@ -107,7 +108,7 @@ export class IndependentDocotorComponent implements OnInit {
 
       var entity = {
         'DoctorName': this.doctorname,
-        'PhoneNo': this.codeid +','+this.phoneno,
+        'PhoneNo': this.codeid + ',' + this.phoneno,
         'Email': this.email,
         'GenderID': this.gender,
         'Address': this.Address,
@@ -140,57 +141,58 @@ export class IndependentDocotorComponent implements OnInit {
         if (data != 0) {
           if (this.languageid == 1) {
             Swal.fire({
-              text:"Thank you for completing the online registration form. We received it. A Voiladoc specialist will contact you shortly.",
+              text: "Thank you for completing the online registration form. We received it. A Voiladoc specialist will contact you shortly.",
               confirmButtonColor: '#3085d6',
               confirmButtonText: "OK"
             }).then((result) => {
-            if (result.isConfirmed) {
-            var desc = "You have a new online registration. Please login to Voiladoc and check the online registration dashboard"
-            this.InsertNotifications(desc)
-            this.sendmail(desc);
-            this.getupdateLoginsUsers()
-            this.doctorname = ""
-            this.phoneno = ""
-            this.email = ""
-            this.gender = ""
-            this.Address = ""
-            this.experience = ""
-            this.speaklanguages = ""
-  
-            localStorage.clear();
-            sessionStorage.clear();
-            location.href = "#/Login";
-            location.reload();
+              if (result.isConfirmed) {
+                var desc = "You have a new online registration. Please login to Voiladoc and check the online registration dashboard"
+                this.InsertNotifications(desc)
+                this.sendmail(desc);
+                this.getupdateLoginsUsers()
+                this.doctorname = ""
+                this.phoneno = ""
+                this.email = ""
+                this.gender = ""
+                this.Address = ""
+                this.experience = ""
+                this.speaklanguages = ""
+
+                localStorage.clear();
+                sessionStorage.clear();
+                location.href = "#/Login";
+                location.reload();
+              }
+            })
           }
-        })
-      }
           else {
-           /*  Swal.fire("Inscription réussie. L'équipe Voiladoc sera bientôt en contact"); */
-           Swal.fire({
-            text:"Merci d'avoir rempli le formulaire d'inscription en ligne. Nous l'avons reçu. Un spécialiste Voiladoc vous contactera prochainement.",
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: "D'accord"
-          }).then((result) => {
-            if (result.isConfirmed) {
-            var desc = "Vous avez une nouvelle inscription en ligne. Veuillez vous connecter à Voiladoc et vérifier le tableau de bord d'inscription en ligne. "
-            this.InsertNotifications(desc)
-            this.sendmail(desc);
-            this.getupdateLoginsUsers()
-            this.doctorname = ""
-            this.phoneno = ""
-            this.email = ""
-            this.gender = ""
-            this.Address = ""
-            this.experience = ""
-            this.speaklanguages = ""
-  
-            localStorage.clear();
-            sessionStorage.clear();
-            location.href = "#/Login";
-            location.reload();
+            /*  Swal.fire("Inscription réussie. L'équipe Voiladoc sera bientôt en contact"); */
+            Swal.fire({
+              text: "Merci d'avoir rempli le formulaire d'inscription en ligne. Nous l'avons reçu. Un spécialiste Voiladoc vous contactera prochainement.",
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: "D'accord"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                var desc = "Vous avez une nouvelle inscription en ligne. Veuillez vous connecter à Voiladoc et vérifier le tableau de bord d'inscription en ligne. "
+                this.InsertNotifications(desc)
+                this.sendmail(desc);
+                this.getupdateLoginsUsers()
+                this.doctorname = ""
+                this.phoneno = ""
+                this.email = ""
+                this.gender = ""
+                this.Address = ""
+                this.experience = ""
+                this.speaklanguages = ""
+
+                localStorage.clear();
+                sessionStorage.clear();
+                location.href = "#/Login";
+                location.reload();
+              }
+            })
           }
-        })}
-        
+
         }
       })
     }
@@ -509,6 +511,6 @@ export class IndependentDocotorComponent implements OnInit {
 
   public GetTypeID(even) {
     debugger;
-    this.cityid=even.target.value
+    this.cityid = even.target.value
   }
 }
