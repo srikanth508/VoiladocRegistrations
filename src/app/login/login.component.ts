@@ -18,11 +18,21 @@ export class LoginComponent implements OnInit {
   public roleid: any;
   public languagelist:any;
   public LanguageID:any;
-
+  Emails=[ {
+    'name': "Widad",
+    'email': "widad@voiladoc.net"
+  },
+  {
+    'name': "emmanuel",
+    'email': "emmanuel@meridionalhealth.com"
+  },
+  {
+    'name': "roumaissa",
+    'email': "roumaissa.ma@voiladoc.ma"
+  }]
   ngOnInit(): void {
     this.getlang();
   }
-
 
 
   public getlang() {
@@ -67,7 +77,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('username', this.result.userName);
               localStorage.setItem('loginid', this.result.id);
               localStorage.setItem("LanguageID", this.LanguageID);
-              localStorage.setItem('Email',this.result.countrymanagerEmail);
+              localStorage.setItem('Email',JSON.stringify(this.Emails));
               localStorage.setItem('countrymanagerid',this.result.countryManagerID);
 
               this.roleid = this.result.typeID;

@@ -75,12 +75,12 @@ export class DoctorserviceService {
   }
 
   public GetAreaMasterByCityIDAndLanguageID(did, lid) {
-
-    return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetAreaMasterByCityIDAndLanguageID?CityID=' + did + '&LanguageID=' + lid);
+debugger
+    return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetCityMasterBYIDandLanguageID?CountryID=' + did + '&LanguageID=' + lid);
   }
   public GetCityMasterBYIDandLanguageID(did, lid) {
 
-    return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetCityMasterBYIDandLanguageID?CountryID=' + did + '&LanguageID=' + lid);
+    return this.http.get<any[]>(this.host1 + '/Doctor/GetRegionMasterWeb?CountryID=' + did);
   }
 
   public NurseIdentityProof(files) {

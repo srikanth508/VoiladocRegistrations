@@ -50,7 +50,7 @@ export class IndependentDocotorComponent implements OnInit {
     debugger
     this.loginid = localStorage.getItem('loginid');
     this.languageid = localStorage.getItem('LanguageID');
-    this.countryemail = localStorage.getItem('Email');
+    this.countryemail = JSON.parse(localStorage.getItem('Email'));
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
     this.getdepartmentmaster();
 
@@ -211,28 +211,33 @@ export class IndependentDocotorComponent implements OnInit {
   }
 
   public GetCountry(LanguageID) {
+    debugger
     this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
       this.countrylist = data;
     })
   }
 
   public GetCountryID(even) {
+    debugger
     this.countryid = even.target.value;
     this.GetProviceMaster(this.countryid, this.languageid);
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
+    debugger
     this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
       this.provicelist = data;
     })
   }
 
   public GetProviceID(even) {
+    debugger
     this.provinceid = even.target.value;
     this.GetCityMaster(this.provinceid, this.languageid);
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
+    debugger
     this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
       this.citylist = data;
     })
@@ -495,18 +500,20 @@ export class IndependentDocotorComponent implements OnInit {
 
 
   public sendmail(desc) {
-
-    var entity = {
-      'emailto': this.countryemail,
-      'emailsubject': "Voiladoc",
-      'emailbody': desc,
-      'attachmenturl': this.emailattchementurl,
-      'cclist': 0,
-      'bcclist': 0
+    debugger
+    for (let i = 0; i < this.countryemail.length; i++) {
+      var entity = {
+        'emailto': this.countryemail[i].email,
+        'emailsubject': "Voiladoc",
+        'emailbody': desc,
+        'attachmenturl': this.emailattchementurl,
+        'cclist': 0,
+        'bcclist': 0
+      }
+      this.docservice.sendemail(entity).subscribe(data => {
+        debugger
+      })
     }
-    this.docservice.sendemail(entity).subscribe(data => {
-      debugger
-    })
   }
 
   public GetTypeID(even) {
