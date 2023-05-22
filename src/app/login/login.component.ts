@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   public result: any;
   public roleid: any;
   public languagelist:any;
-  public LanguageID:any;
+  public LanguageID:any;jgjg
   Emails=[ {
     'name': "Widad",
     'email': "widad@voiladoc.net"
