@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
   public password: any;
   public result: any;
   public roleid: any;
-  public languagelist:any;
-  public LanguageID:any;jgjg
-  Emails=[ {
+  public languagelist: any;
+  public LanguageID: any; jgjg
+  Emails = [{
     'name': "Widad",
     'email': "widad@voiladoc.net"
   },
@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
   }]
   ngOnInit(): void {
     this.getlang();
+    var Contry = location.href.split('/').pop();   
+    localStorage.setItem('CountryID', Contry);
   }
 
 
@@ -77,8 +79,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('username', this.result.userName);
               localStorage.setItem('loginid', this.result.id);
               localStorage.setItem("LanguageID", this.LanguageID);
-              localStorage.setItem('Email',JSON.stringify(this.Emails));
-              localStorage.setItem('countrymanagerid',this.result.countryManagerID);
+              localStorage.setItem('Email', JSON.stringify(this.Emails));
+              localStorage.setItem('countrymanagerid', this.result.countryManagerID);
 
               this.roleid = this.result.typeID;
               debugger
@@ -116,18 +118,16 @@ export class LoginComponent implements OnInit {
               }
             }
             else {
-              if(this.LanguageID==1)
-              {
-                Swal.fire('Error','UserName and Password invalid');
+              if (this.LanguageID == 1) {
+                Swal.fire('Error', 'UserName and Password invalid');
               }
-              else if(this.LanguageID==6)
-              {
-                Swal.fire('Erreur',"Le nom d'utilisateur ou le mot de passe n'est pas correct !");
+              else if (this.LanguageID == 6) {
+                Swal.fire('Erreur', "Le nom d'utilisateur ou le mot de passe n'est pas correct !");
               }
-            
-    
+
+
             }
-    
+
           })
 
         }
@@ -137,7 +137,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  labels:any;
+  labels: any;
 
 
   public getlanguage() {

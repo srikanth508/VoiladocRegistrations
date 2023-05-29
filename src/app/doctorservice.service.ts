@@ -14,6 +14,7 @@ export class DoctorserviceService {
   // private host1 = "https://maroc.voiladoc.org/VoilaDocWebAPI";
 
   private host1 = "https://maroc.voiladoc.org/MarocAPI";
+  private host2 = "https://madagascar.voiladoc-eastafrica.com/MadagascarWebAPI";
   private url: string = '';
 
   public GetLanguageMaster() {
@@ -51,8 +52,11 @@ export class DoctorserviceService {
   }
 
   public GetDepartmentMasterByLanguageID(lid) {
-
-    return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetDepartmentMasterByLanguageID?LanguageID=' + lid);
+    if (localStorage.getItem('CountryID') == '1') {
+      return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetDepartmentMasterByLanguageID?LanguageID=' + lid);
+    } {
+      return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetDepartmentMasterByLanguageID?LanguageID=' + lid);
+    }
   }
 
   public InsertPharmacy_Registration(data) {
@@ -66,7 +70,7 @@ export class DoctorserviceService {
   }
 
   public UpdateVoiladocRegistrationEmails(id) {
-    debugger
+
     return this.http.get<any[]>(this.host + '/Master/UpdateVoiladocRegistrationEmails?ID=' + id);
   }
   public GetCountryMasterByLanguageID(lid) {
@@ -74,13 +78,29 @@ export class DoctorserviceService {
     return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetCountryMasterByLanguageID?LanguageID=' + lid);
   }
 
+  public GetCountryMasterlanguageIDbyCountryID(lid) {
+    debugger;
+    return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetCountryMasterByLanguageID?LanguageID=' + lid);
+  }
+
   public GetAreaMasterByCityIDAndLanguageID(did, lid) {
-debugger
+
     return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetCityMasterBYIDandLanguageID?CountryID=' + did + '&LanguageID=' + lid);
+  }
+
+  public GetAreaMasterByCityIDAndLanguageIDByCountryID(did, lid) {
+
+    return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetCityMasterBYIDandLanguageID?CountryID=' + did + '&LanguageID=' + lid);
   }
   public GetCityMasterBYIDandLanguageID(did, lid) {
 
     return this.http.get<any[]>(this.host1 + '/Doctor/GetRegionMasterWeb?CountryID=' + did);
+  }
+
+
+  public GetCityMasterByIdDandLanguageIDByCountryID(did, lid) {
+    return this.http.get<any[]>(this.host2 + '/Doctor/GetRegionMasterWeb?CountryID=' + did)
+
   }
 
   public NurseIdentityProof(files) {
@@ -108,13 +128,20 @@ debugger
     return this.http.post(this.host1 + '/Master/UploadHospitalImages/', formdata);
   }
   public GetSpecilaizationMaster(lid) {
-
+    if (localStorage.getItem('CountryID') == '1') {
     return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetSpecilaizationMasterByLanguageID?LanguageID=' + lid);
+    }else
+    {
+      return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetSpecilaizationMasterByLanguageID?LanguageID=' + lid);
+    }
   }
 
   public GetDoctorTypeMaster(lid) {
-
-    return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetDoctorTypeMasterByLanguageID?LanguageID=' + lid);
+    if (localStorage.getItem('CountryID') == '1') {
+      return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetDoctorTypeMasterByLanguageID?LanguageID=' + lid);
+    } {
+      return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetDoctorTypeMasterByLanguageID?LanguageID=' + lid);
+    }
   }
 
   public GetHospital_ClinicDetailsForAdminByLanguageID(did, lid) {
@@ -123,13 +150,20 @@ debugger
   }
 
   public GetHospital_Clinic(did) {
-
-    return this.http.get<any[]>(this.host1 + '/Hospital/GetHospital_ClinicForAdminByAdmin?LanguageID=' + did);
+    if (localStorage.getItem('CountryID') == '1') {
+      return this.http.get<any[]>(this.host1 + '/Hospital/GetHospital_ClinicForAdminByAdmin?LanguageID=' + did);
+    } {
+      return this.http.get<any[]>(this.host2 + '/Hospital/GetHospital_ClinicForAdminByAdmin?LanguageID=' + did);
+    }
   }
 
   public GetDegreeMaster(lid) {
-
-    return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetDegreeMasterBylanguageID?LanguageID=' + lid);
+    if (localStorage.getItem('CountryID') == '1') {
+      return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetDegreeMasterBylanguageID?LanguageID=' + lid);
+    }
+    {
+      return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetDegreeMasterBylanguageID?LanguageID=' + lid);
+    }
   }
 
   public DoctorMedicalProof(files) {
@@ -155,8 +189,12 @@ debugger
   //labels
 
   public GetAdmin_Doctorregistration_LabelsByLanguageID(lid) {
-
-    return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_Doctorregistration_LabelsByLanguageID?LanguageID=' + lid);
+    if (localStorage.getItem('CountryID') == '1') {
+      return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_Doctorregistration_LabelsByLanguageID?LanguageID=' + lid);
+    }
+    {
+      return this.http.get<any[]>(this.host2 + '/LanguageMaster/GetAdmin_Doctorregistration_LabelsByLanguageID?LanguageID=' + lid);
+    }
   }
 
   public GetAdmin_HospitalClinicRegistration_Lables(lid) {
@@ -199,8 +237,15 @@ debugger
   }
 
   public Authenicate(data) {
-    this.url = this.host1 + '/Doctor/Authenicate';
-    return this.http.post(this.url, data)
+    if (localStorage.getItem('CountryID') == '1') {
+      this.url = this.host1 + '/Doctor/Authenicate';
+      return this.http.post(this.url, data)
+    }
+    else {
+      this.url = this.host2 + '/Doctor/Authenicate';
+      return this.http.post(this.url, data)
+    }
+
   }
 
   public sendemail(data) {

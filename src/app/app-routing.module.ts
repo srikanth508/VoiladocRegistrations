@@ -22,6 +22,7 @@ import { PharmacyComponent } from './pharmacy/pharmacy.component';
 const routes: Routes = [
   { path: '', redirectTo: '/Login', pathMatch: 'full' },
   { path: 'Login', component: LoginComponent },
+  { path: 'Login/:id', component: LoginComponent },
   { path: 'Sidebar', component: SidebarComponent },
   { path: 'TrainingCategory', component: TrainingCategoryComponent },
   { path: 'TraingingCategoryDash', component: TraingingCategoryDashComponent },

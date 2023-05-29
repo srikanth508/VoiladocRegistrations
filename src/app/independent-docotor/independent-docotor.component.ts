@@ -13,6 +13,7 @@ export class IndependentDocotorComponent implements OnInit {
   degreemaster: any;
   degreeid: any;
   codeid: any;
+  countryID: any;
   constructor(private docservice: DoctorserviceService) { }
   countrylist: any;
   provicelist: any;
@@ -49,6 +50,7 @@ export class IndependentDocotorComponent implements OnInit {
   ngOnInit(): void {
     debugger
     this.loginid = localStorage.getItem('loginid');
+    this.countryID = localStorage.getItem('CountryID');
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = JSON.parse(localStorage.getItem('Email'));
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
@@ -212,9 +214,17 @@ export class IndependentDocotorComponent implements OnInit {
 
   public GetCountry(LanguageID) {
     debugger
-    this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
-      this.countrylist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
+        this.countrylist = data;
+      })
+    }
+    else {
+      debugger;
+      this.docservice.GetCountryMasterlanguageIDbyCountryID(LanguageID).subscribe(data => {
+        this.countrylist = data;
+      })
+    }
   }
 
   public GetCountryID(even) {
@@ -225,9 +235,16 @@ export class IndependentDocotorComponent implements OnInit {
 
   public GetProviceMaster(CountryID, LanguageID) {
     debugger
-    this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
-      this.provicelist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
+    else {
+      this.docservice.GetCityMasterByIdDandLanguageIDByCountryID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
   }
 
   public GetProviceID(even) {
@@ -238,9 +255,15 @@ export class IndependentDocotorComponent implements OnInit {
 
   public GetCityMaster(ProvinceID, LanguageID) {
     debugger
-    this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
-      this.citylist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    } else {
+      this.docservice.GetAreaMasterByCityIDAndLanguageIDByCountryID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    }
   }
   zipcode: any;
   public GetCityID(even) {
