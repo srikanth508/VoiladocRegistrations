@@ -50,7 +50,7 @@ export class IndependentDocotorComponent implements OnInit {
   ngOnInit(): void {
     debugger
     this.loginid = localStorage.getItem('loginid');
-    this.countryID = localStorage.getItem('CountryID');
+    this.countryID = sessionStorage.getItem('CountryID');
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = JSON.parse(localStorage.getItem('Email'));
     this.countrymanagerid = localStorage.getItem('countrymanagerid');

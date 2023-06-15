@@ -8,7 +8,9 @@ import { DoctorserviceService } from '../app/doctorservice.service'
 })
 export class AppComponent {
   title = 'DigiLMS';
-  constructor(private lmsservice: LmsService,private docservice: DoctorserviceService) { }
+  countryCode: any;
+  phonenumer: string;
+  constructor(private lmsservice: LmsService, private docservice: DoctorserviceService) { }
   public temp: any;
   public userid: any;
   public messages: any;
@@ -17,14 +19,21 @@ export class AppComponent {
   public isDescktopResolution: boolean;
   public roleid: any;
   public username: any;
-  languageid:any;
-  labels:any;
+  languageid: any;
+  labels: any;
   ngOnInit() {
     debugger;
     this.temp = sessionStorage.getItem("temp");
     this.roleid = localStorage.getItem('roleid');
     this.username = localStorage.getItem('username');
     this.languageid = localStorage.getItem('LanguageID');
+    this.countryCode = sessionStorage.getItem('CountryID');
+    if (this.countryCode == 2) {
+      this.phonenumer = '+261 340795048';
+    }
+    else {
+      this.phonenumer = '+212 522446145';
+    }
     if (window.innerWidth < 600) {
       this.isMobileResolution = true;
       this.isDescktopResolution = false;

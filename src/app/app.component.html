@@ -8,8 +8,8 @@
                      <!-- <h3>digiLMS</h3> -->
               </div>
               <div class="col-lg-8">
-                     <marquee style="color: red;padding-top: 2%;" *ngIf="languageid==6">Veuillez nous appeler au +212 522446145 si vous avez besoin d'aide.</marquee>
-                     <marquee style="color: red;padding-top: 2%;" *ngIf="languageid==1">Please call us on +212 522446145 if you need assistance.</marquee>
+                     <marquee style="color: red;padding-top: 2%;" *ngIf="languageid==6">Veuillez nous appeler au {{phonenumer}} si vous avez besoin d'aide.</marquee>
+                     <marquee style="color: red;padding-top: 2%;" *ngIf="languageid==1">Please call us on {{phonenumer}} if you need assistance.</marquee>
               </div>
               <div class="col-lg-2">
                      <img src="assets/images/logout.png" (click)="logout()" title="{{labels[0].logout}}" style="float: right;padding-right: 1%; padding-top: 5%;margin-right: 18%;">

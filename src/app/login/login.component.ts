@@ -32,8 +32,9 @@ export class LoginComponent implements OnInit {
   }]
   ngOnInit(): void {
     this.getlang();
-    var Contry = location.href.split('/').pop();   
-    localStorage.setItem('CountryID', Contry);
+    debugger;
+    var Contry = location.href.split('/').pop();
+    sessionStorage.setItem('CountryID', Contry);
   }
 
 
