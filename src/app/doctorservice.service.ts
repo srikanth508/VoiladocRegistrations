@@ -129,9 +129,8 @@ export class DoctorserviceService {
   }
   public GetSpecilaizationMaster(lid) {
     if (sessionStorage.getItem('CountryID') == '1') {
-    return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetSpecilaizationMasterByLanguageID?LanguageID=' + lid);
-    }else
-    {
+      return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetSpecilaizationMasterByLanguageID?LanguageID=' + lid);
+    } else {
       return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetSpecilaizationMasterByLanguageID?LanguageID=' + lid);
     }
   }
@@ -181,7 +180,11 @@ export class DoctorserviceService {
     for (let i = 0; i < files.length; i++) {
       formdata.append('file_upload', files[i], files[i].name);
     }
-    return this.http.post(this.host1 + '/Doctor/PhotoUpload/', formdata);
+    if (sessionStorage.getItem('CountryID') == '1') {
+      return this.http.post(this.host1 + '/Doctor/PhotoUpload/', formdata);
+    } else {
+      return this.http.post(this.host2 + '/Doctor/PhotoUpload/', formdata);
+    }
   }
 
 
@@ -192,7 +195,7 @@ export class DoctorserviceService {
     if (sessionStorage.getItem('CountryID') == '1') {
       return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_Doctorregistration_LabelsByLanguageID?LanguageID=' + lid);
     }
-    {
+    else {
       return this.http.get<any[]>(this.host2 + '/LanguageMaster/GetAdmin_Doctorregistration_LabelsByLanguageID?LanguageID=' + lid);
     }
   }

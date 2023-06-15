@@ -353,7 +353,13 @@ export class IndependentDocotorComponent implements OnInit {
       debugger
       this.identityproofurl = res;
       let a = this.identityproofurl.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      var b;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      } else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+      }
+
       this.showidentityphoto = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');
@@ -389,7 +395,14 @@ export class IndependentDocotorComponent implements OnInit {
       debugger
       this.medicalregproof = res;
       let a = this.medicalregproof.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      var b;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      } else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+      }
+
+
       this.showmedicalproof = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');
@@ -424,7 +437,15 @@ export class IndependentDocotorComponent implements OnInit {
       debugger
       this.resumeurl = res;
       let a = this.resumeurl.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      var b;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      }
+      else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+
+      }
+
       this.showressume = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');
@@ -457,8 +478,14 @@ export class IndependentDocotorComponent implements OnInit {
     this.docservice.DoctorPhotoUpload(this.docphotos).subscribe(res => {
       debugger
       this.docphoto = res;
+      var b;
       let a = this.docphoto.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      }
+      else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+      }
       this.showdocphoto = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');
@@ -492,7 +519,12 @@ export class IndependentDocotorComponent implements OnInit {
       debugger
       this.signaturephoto = res;
       let a = this.signaturephoto.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      var b;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      } else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+      }
       this.showsigphoto = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');
