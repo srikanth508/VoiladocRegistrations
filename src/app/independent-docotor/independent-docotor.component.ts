@@ -99,6 +99,7 @@ export class IndependentDocotorComponent implements OnInit {
   public regno: any;
   regcouncil: any;
   medicalregproof: any;
+  yearOfPassing: any;
 
 
   public InsertedDetails() {
@@ -124,8 +125,8 @@ export class IndependentDocotorComponent implements OnInit {
         'CityID': this.cityid,
         'SlotDurationID': this.slotdurationid,
         'DoctorType': this.doctortypeid,
-        'MallPractise': this.malpractice,
-        'ReferredDoctor': this.reffereddoctor,
+        'MallPractise': Number(this.malpractice),
+        'ReferredDoctor': Number(this.reffereddoctor),
         'SignaturePhoto': this.signaturephoto,
         'Photo': this.docphoto,
         'HospitalID': this.hospitalclinicid,
@@ -133,11 +134,12 @@ export class IndependentDocotorComponent implements OnInit {
         'OtherExperiences': this.otherexperiences,
         'Identityproof': this.identityproofurl,
         'DegreeID': this.degreeid,
-        'Colleage': this.colleagename,
+        'Colleage': this.colleagename + ',' + this.yearOfPassing,
         'RegistrationNumber': this.regno,
         'RegistrationCouncil': this.regcouncil,
         'MedicalRegProof': this.medicalregproof,
-        'Pincode': this.zipcode
+        'Pincode': this.zipcode,
+        'yearOfPassing': this.yearOfPassing
       }
       this.docservice.InsertDoctorRegistration(entity).subscribe(data => {
         if (data != 0) {
@@ -533,7 +535,7 @@ export class IndependentDocotorComponent implements OnInit {
         Swal.fire('Ajouté avec succès');
       }
       this.signatures.length = 0;
-      debugger
+      
     })
 
   }
