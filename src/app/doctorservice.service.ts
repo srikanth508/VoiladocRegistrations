@@ -78,6 +78,10 @@ export class DoctorserviceService {
     return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetCountryMasterByLanguageID?LanguageID=' + lid);
   }
 
+  public GetCountryMasterByLanguageIDByCountryID(lid){
+    return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetCountryMasterByLanguageID?LanguageID=' + lid);
+  }
+
   public GetCountryMasterlanguageIDbyCountryID(lid) {
     debugger;
     return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetCountryMasterByLanguageID?LanguageID=' + lid);
@@ -203,6 +207,11 @@ export class DoctorserviceService {
   public GetAdmin_HospitalClinicRegistration_Lables(lid) {
 
     return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_HospitalClinicRegistration_Lables?LanguageID=' + lid);
+  }
+
+  public GetAdmin_HospitalClinicRegistration_LablesByCountryID(lid) {
+
+    return this.http.get<any[]>(this.host2 + '/LanguageMaster/GetAdmin_HospitalClinicRegistration_Lables?LanguageID=' + lid);
   }
 
   public GetAdmin_NurseRegistration_labelByLanguageID(lid) {

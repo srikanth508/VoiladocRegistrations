@@ -135,7 +135,7 @@ export class IndependentDocotorComponent implements OnInit {
         'Identityproof': this.identityproofurl,
         'DegreeID': this.degreeid,
         'Colleage': this.colleagename + ',' + this.yearOfPassing,
-        'RegistrationNumber': this.regno,
+        'RegistrationNumber': this.regno + ',' +  Number(this.countryID),
         'RegistrationCouncil': this.regcouncil,
         'MedicalRegProof': this.medicalregproof,
         'Pincode': this.zipcode,
@@ -535,7 +535,7 @@ export class IndependentDocotorComponent implements OnInit {
         Swal.fire('Ajouté avec succès');
       }
       this.signatures.length = 0;
-      
+
     })
 
   }

@@ -11,6 +11,7 @@ export class HospitalComponent implements OnInit {
   provinceid: any;
   cityid: any;
   showphoto: any;
+  countryID: any;
 
   constructor(private docservice: DoctorserviceService) { }
 
@@ -43,15 +44,23 @@ export class HospitalComponent implements OnInit {
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
+    this.countryID = sessionStorage.getItem('CountryID');
     this.GetCountry(this.languageid);
     this.getlanguage()
   }
 
   public getlanguage() {
-    this.docservice.GetAdmin_HospitalClinicRegistration_Lables(this.languageid).subscribe(data => {
-      this.labels = data;
+    if (this.countryID == 1) {
+      this.docservice.GetAdmin_HospitalClinicRegistration_Lables(this.languageid).subscribe(data => {
+        this.labels = data;
 
-    })
+      })
+    } else {
+      this.docservice.GetAdmin_HospitalClinicRegistration_LablesByCountryID(this.languageid).subscribe(data => {
+        this.labels = data;
+
+      })
+    }
   }
 
 
@@ -59,14 +68,14 @@ export class HospitalComponent implements OnInit {
     debugger
     var entity = {
       'HospitalName': this.hospitalname,
-      'HospitalPhoneNo': this.hospitalphoneno,
+      'HospitalPhoneNo': this.hospitalphoneno+ ',' + this.countryID,
       'ContactpersonName': this.contactpersonname,
       'ContatcpersonPhoneNo': this.contatcpersonphoneno,
       'EmailID': this.emailid,
       'Address': this.address,
       'Website': this.website,
       'HospitalClinicID': 1,
-      'RegID': this.loginid,
+      'RegID': this.loginid ,
       'Zipcode': this.zipcode,
       'Open24Hrs': this.open24hrs,
       'YearEstablished': this.yearestablished,
@@ -119,31 +128,54 @@ export class HospitalComponent implements OnInit {
   }
 
   public GetCountry(LanguageID) {
-    this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
-      this.countrylist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
+        this.countrylist = data;
+      })
+    }
+    else {
+      this.docservice.GetCountryMasterByLanguageIDByCountryID(LanguageID).subscribe(data => {
+        this.countrylist = data;
+      })
+    }
+
   }
 
   public GetCountryID(even) {
+    debugger
     this.countryid = even.target.value;
     this.GetProviceMaster(this.countryid, this.languageid);
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
-    this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
-      this.provicelist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
+    else {
+      this.docservice.GetCityMasterByIdDandLanguageIDByCountryID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
   }
 
   public GetProviceID(even) {
+    debugger;
     this.provinceid = even.target.value;
     this.GetCityMaster(this.provinceid, this.languageid);
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
-    this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
-      this.citylist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    } else {
+      this.docservice.GetAreaMasterByCityIDAndLanguageIDByCountryID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    }
   }
 
   public GetCityID(even) {
@@ -164,7 +196,14 @@ export class HospitalComponent implements OnInit {
       debugger
       this.photourl = res;
       let a = this.photourl.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      var b;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      } else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+      }
+
+
       this.showphoto = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');
@@ -174,7 +213,7 @@ export class HospitalComponent implements OnInit {
       }
       this.photo.length = 0;
       debugger
-    },error=>{
+    }, error => {
 
     })
   }
