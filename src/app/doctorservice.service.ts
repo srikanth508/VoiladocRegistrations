@@ -218,6 +218,10 @@ export class DoctorserviceService {
 
     return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_NurseRegistration_labelByLanguageID?LanguageID=' + lid);
   }
+  public GetAdmin_NurseRegistration_labelByLanguageIDByCountryID(lid) {
+
+    return this.http.get<any[]>(this.host2 + '/LanguageMaster/GetAdmin_NurseRegistration_labelByLanguageID?LanguageID=' + lid);
+  }
   public GetAdmin_PhysiotherapistRegistration_Label(lid) {
 
     return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_PhysiotherapistRegistration_Label?LanguageID=' + lid);
