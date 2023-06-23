@@ -46,6 +46,7 @@ export class IndependenMidwifeComponent implements OnInit {
   Education: any;
   countryemail: any;
   countrymanagerid: any;
+  countryID: any;
 
   ngOnInit(): void {
     this.loginid = localStorage.getItem('loginid');
@@ -54,15 +55,26 @@ export class IndependenMidwifeComponent implements OnInit {
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
     this.getdepartmentmaster();
     this.GetCountry(this.languageid);
+    this.countryID = sessionStorage.getItem('CountryID');
+    if (this.countryID == 1) {
+      this.docservice.GetAdmin_MidWifeRegistration_LabelByLanguageID(this.languageid).subscribe(
+        data => {
 
-    this.docservice.GetAdmin_MidWifeRegistration_LabelByLanguageID(this.languageid).subscribe(
-      data => {
+          this.labels = data;
 
-        this.labels = data;
+        }, error => {
+        }
+      )
+    } else {
+      this.docservice.GetAdmin_MidWifeRegistration_LabelByLanguageIDByCountryID(this.languageid).subscribe(
+        data => {
 
-      }, error => {
-      }
-    )
+          this.labels = data;
+
+        }, error => {
+        }
+      )
+    }
     this.GetSpecilizationmaster(this.languageid);
   }
 

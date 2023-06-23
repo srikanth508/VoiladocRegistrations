@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 })
 export class IndependentPhysioRegistrationComponent implements OnInit {
 
+
   constructor(private docservice: DoctorserviceService) { }
 
   public gender: any;
@@ -45,22 +46,31 @@ export class IndependentPhysioRegistrationComponent implements OnInit {
   education: any;
   countryemail: any;
   countrymanagerid: any;
+  countryID: any;
   ngOnInit(): void {
     this.loginid = localStorage.getItem('loginid');
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
+    this.countryID = sessionStorage.getItem('CountryID');
     this.getdepartmentmaster();
     this.GetCountry(this.languageid);
 
-    this.docservice.GetAdmin_PhysiotherapistRegistration_Label(this.languageid).subscribe(
-      data => {
-
-        this.labels = data;
-
-      }, error => {
-      }
-    )
+    if (this.countryID == 1) {
+      this.docservice.GetAdmin_PhysiotherapistRegistration_Label(this.languageid).subscribe(
+        data => {
+          this.labels = data;
+        }, error => {
+        }
+      )
+    } else {
+      this.docservice.GetAdmin_PhysiotherapistRegistration_LabelByCountryID(this.languageid).subscribe(
+        data => {
+          this.labels = data;
+        }, error => {
+        }
+      )
+    }
     this.GetSpecilizationmaster(this.languageid)
   }
 
@@ -88,7 +98,7 @@ export class IndependentPhysioRegistrationComponent implements OnInit {
   public InsertedDetails() {
     var entity = {
       'PhysioName': this.physioname,
-      'PhoneNo': this.phoneno,
+      'PhoneNo': this.phoneno + ',' + this.countryID,
       'Email': this.email,
       'GenderID': this.gender,
       'Address': this.address,
@@ -160,9 +170,18 @@ export class IndependentPhysioRegistrationComponent implements OnInit {
 
 
   public GetCountry(LanguageID) {
-    this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
-      this.countrylist = data;
-    })
+    debugger
+    if (this.countryID == 1) {
+      this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
+        this.countrylist = data;
+      })
+    }
+    else {
+      debugger;
+      this.docservice.GetCountryMasterlanguageIDbyCountryID(LanguageID).subscribe(data => {
+        this.countrylist = data;
+      })
+    }
   }
 
   public GetCountryID(even) {
@@ -171,9 +190,17 @@ export class IndependentPhysioRegistrationComponent implements OnInit {
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
-    this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
-      this.provicelist = data;
-    })
+    debugger
+    if (this.countryID == 1) {
+      this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
+    else {
+      this.docservice.GetCityMasterByIdDandLanguageIDByCountryID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
   }
 
   public GetProviceID(even) {
@@ -182,9 +209,16 @@ export class IndependentPhysioRegistrationComponent implements OnInit {
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
-    this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
-      this.citylist = data;
-    })
+    debugger
+    if (this.countryID == 1) {
+      this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    } else {
+      this.docservice.GetAreaMasterByCityIDAndLanguageIDByCountryID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    }
   }
 
   public GetCityID(even) {
@@ -208,7 +242,12 @@ export class IndependentPhysioRegistrationComponent implements OnInit {
       debugger
       this.photourl = res;
       let a = this.photourl.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      var b;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      } else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+      }
       this.showphoto = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');
@@ -234,7 +273,12 @@ export class IndependentPhysioRegistrationComponent implements OnInit {
       debugger
       this.identityproofurl = res;
       let a = this.identityproofurl.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      var b;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      } else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+      }
       this.showidentityphoto = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');

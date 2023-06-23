@@ -227,11 +227,18 @@ export class DoctorserviceService {
     return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_PhysiotherapistRegistration_Label?LanguageID=' + lid);
   }
 
+  public GetAdmin_PhysiotherapistRegistration_LabelByCountryID(lid) {
+
+    return this.http.get<any[]>(this.host2 + '/LanguageMaster/GetAdmin_PhysiotherapistRegistration_Label?LanguageID=' + lid);
+  }
   public GetAdmin_MidWifeRegistration_LabelByLanguageID(lid) {
 
     return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_MidWifeRegistration_LabelByLanguageID?LanguageID=' + lid);
   }
+  public GetAdmin_MidWifeRegistration_LabelByLanguageIDByCountryID(lid) {
 
+    return this.http.get<any[]>(this.host2 + '/LanguageMaster/GetAdmin_MidWifeRegistration_LabelByLanguageID?LanguageID=' + lid);
+  }
   public GetAdmin_PharmacyRegistration_LabelByLanguageID(lid) {
 
     return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_PharmacyRegistration_LabelByLanguageID?LanguageID=' + lid);
