@@ -78,7 +78,7 @@ export class DoctorserviceService {
     return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetCountryMasterByLanguageID?LanguageID=' + lid);
   }
 
-  public GetCountryMasterByLanguageIDByCountryID(lid){
+  public GetCountryMasterByLanguageIDByCountryID(lid) {
     return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetCountryMasterByLanguageID?LanguageID=' + lid);
   }
 
@@ -244,11 +244,20 @@ export class DoctorserviceService {
     return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_PharmacyRegistration_LabelByLanguageID?LanguageID=' + lid);
   }
 
+  public GetAdmin_PharmacyRegistration_LabelByLanguageIDByCountryID(lid) {
+
+    return this.http.get<any[]>(this.host2 + '/LanguageMaster/GetAdmin_PharmacyRegistration_LabelByLanguageID?LanguageID=' + lid);
+  }
+
   public GetAdmin_DiagnosticRegistration_LabelBYLanguageID(lid) {
 
     return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_DiagnosticRegistration_LabelBYLanguageID?LanguageID=' + lid);
   }
 
+  public GetAdmin_DiagnosticRegistration_LabelBYLanguageIDByCountryID(lid) {
+
+    return this.http.get<any[]>(this.host2 + '/LanguageMaster/GetAdmin_DiagnosticRegistration_LabelBYLanguageID?LanguageID=' + lid);
+  }
   public GetAdmin_LoginPage_Labels(lid) {
 
     return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_LoginPage_Labels?LanguageID=' + lid);

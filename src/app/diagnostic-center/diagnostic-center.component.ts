@@ -32,7 +32,7 @@ export class DiagnosticCenterComponent implements OnInit {
   labels: any;
   countryemail: any;
   countrymanagerid: any;
-
+  countryID: any;
   ngOnInit(): void {
 
     this.loginid = localStorage.getItem('loginid')
@@ -40,15 +40,28 @@ export class DiagnosticCenterComponent implements OnInit {
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
     this.GetCountry(this.languageid);
+    this.countryID = sessionStorage.getItem('CountryID');
 
-    this.docservice.GetAdmin_DiagnosticRegistration_LabelBYLanguageID(this.languageid).subscribe(
-      data => {
+    if (this.countryID == 1) {
+      this.docservice.GetAdmin_DiagnosticRegistration_LabelBYLanguageID(this.languageid).subscribe(
+        data => {
 
-        this.labels = data;
+          this.labels = data;
 
-      }, error => {
-      }
-    )
+        }, error => {
+        }
+      )
+    } else {
+      this.docservice.GetAdmin_DiagnosticRegistration_LabelBYLanguageIDByCountryID(this.languageid).subscribe(
+        data => {
+
+          this.labels = data;
+
+        }, error => {
+        }
+      )
+    }
+
   }
 
 
@@ -56,9 +69,17 @@ export class DiagnosticCenterComponent implements OnInit {
 
 
   public GetCountry(LanguageID) {
-    this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
-      this.countrylist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
+        this.countrylist = data;
+      })
+    }
+    else {
+      debugger;
+      this.docservice.GetCountryMasterlanguageIDbyCountryID(LanguageID).subscribe(data => {
+        this.countrylist = data;
+      })
+    }
   }
 
   public GetCountryID(even) {
@@ -67,9 +88,16 @@ export class DiagnosticCenterComponent implements OnInit {
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
-    this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
-      this.provicelist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
+    else {
+      this.docservice.GetCityMasterByIdDandLanguageIDByCountryID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
   }
 
   public GetProviceID(even) {
@@ -78,9 +106,15 @@ export class DiagnosticCenterComponent implements OnInit {
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
-    this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
-      this.citylist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    } else {
+      this.docservice.GetAreaMasterByCityIDAndLanguageIDByCountryID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    }
   }
 
   public GetCityID(even) {
@@ -96,7 +130,7 @@ export class DiagnosticCenterComponent implements OnInit {
   public Insertdetails() {
     var entity = {
       'DiagnosticCenterName': this.diagnosticcentername,
-      'BusinessPhoneNo': this.businessphno,
+      'BusinessPhoneNo': this.businessphno + ',' + this.countryID,
       'ContactPersonName': this.contactpersonname,
       'ContactPersonPhNo': this.contatcpersonphoneno,
       'BusinessLicenceNumber': this.licenceno,
@@ -170,7 +204,12 @@ export class DiagnosticCenterComponent implements OnInit {
       debugger
       this.photourl = res;
       let a = this.photourl.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      var b;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      } else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+      }
       this.showphoto = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');
