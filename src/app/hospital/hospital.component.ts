@@ -44,7 +44,7 @@ export class HospitalComponent implements OnInit {
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
-    this.countryID = sessionStorage.getItem('CountryID');
+   // this.countryID = sessionStorage.getItem('CountryID');
     this.GetCountry(this.languageid);
     this.getlanguage()
   }

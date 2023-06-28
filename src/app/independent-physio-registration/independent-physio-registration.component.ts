@@ -52,7 +52,7 @@ export class IndependentPhysioRegistrationComponent implements OnInit {
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
-    this.countryID = sessionStorage.getItem('CountryID');
+  //  this.countryID = sessionStorage.getItem('CountryID');
     this.getdepartmentmaster();
     this.GetCountry(this.languageid);
 
