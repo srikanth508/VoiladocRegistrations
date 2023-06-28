@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./clinics.component.css']
 })
 export class ClinicsComponent implements OnInit {
+  countryID: any;
 
   constructor(private docservice: DoctorserviceService) { }
 
@@ -44,18 +45,26 @@ export class ClinicsComponent implements OnInit {
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
+    this.countryID = sessionStorage.getItem('CountryID');
     this.GetCountry(this.languageid);
     this.getlanguage();
   }
 
 
-
   public getlanguage() {
-    this.docservice.GetAdmin_HospitalClinicRegistration_Lables(this.languageid).subscribe(data => {
-      this.labels = data;
+    if (this.countryID == 1) {
+      this.docservice.GetAdmin_HospitalClinicRegistration_Lables(this.languageid).subscribe(data => {
+        this.labels = data;
 
-    })
+      })
+    } else {
+      this.docservice.GetAdmin_HospitalClinicRegistration_LablesByCountryID(this.languageid).subscribe(data => {
+        this.labels = data;
+
+      })
+    }
   }
+
 
 
 
@@ -63,7 +72,7 @@ export class ClinicsComponent implements OnInit {
     debugger
     var entity = {
       'HospitalName': this.clinicname,
-      'HospitalPhoneNo': this.clinicphoneno,
+      'HospitalPhoneNo': this.clinicphoneno + ',' + this.countryID,
       'ContactpersonName': this.contactpersonname,
       'ContatcpersonPhoneNo': this.contatcpersonphoneno,
       'EmailID': this.emailid,
@@ -135,22 +144,33 @@ export class ClinicsComponent implements OnInit {
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
-    this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
-      this.provicelist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
+    else {
+      this.docservice.GetCityMasterByIdDandLanguageIDByCountryID(CountryID, LanguageID).subscribe(data => {
+        this.provicelist = data;
+      })
+    }
   }
-
   public GetProviceID(even) {
     this.provinceid = even.target.value;
     this.GetCityMaster(this.provinceid, this.languageid);
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
-    this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
-      this.citylist = data;
-    })
+    if (this.countryID == 1) {
+      this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    } else {
+      this.docservice.GetAreaMasterByCityIDAndLanguageIDByCountryID(ProvinceID, LanguageID).subscribe(data => {
+        this.citylist = data;
+      })
+    }
   }
-
   public GetCityID(even) {
     this.cityid = even.target.value;
     this.zipcode = this.citylist.filter(x => x.id == this.cityid)[0].pincode;
@@ -169,7 +189,13 @@ export class ClinicsComponent implements OnInit {
       debugger
       this.photourl = res;
       let a = this.photourl.slice(2);
-      let b = 'https://maroc.voiladoc.org' + a;
+      var b;
+      if (this.countryID == 1) {
+        b = 'https://maroc.voiladoc.org' + a;
+      } else {
+        b = 'https://madagascar.voiladoc-eastafrica.com' + a;
+      }
+
       this.showphoto = b;
       if (this.languageid == 1) {
         Swal.fire('Photo added successfully.');
