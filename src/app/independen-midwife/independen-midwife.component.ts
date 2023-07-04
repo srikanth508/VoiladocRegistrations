@@ -55,7 +55,7 @@ export class IndependenMidwifeComponent implements OnInit {
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
     this.getdepartmentmaster();
     this.GetCountry(this.languageid);
-    //this.countryID = sessionStorage.getItem('CountryID');
+    this.countryID = sessionStorage.getItem('CountryID');
     if (this.countryID == 1) {
       this.docservice.GetAdmin_MidWifeRegistration_LabelByLanguageID(this.languageid).subscribe(
         data => {
@@ -96,7 +96,7 @@ export class IndependenMidwifeComponent implements OnInit {
   public InsertedDetails() {
     var entity = {
       'MidwifeName': this.midwifename,
-      'PhoneNo': this.phoneno+ ',' + this.countryID,
+      'PhoneNo': this.phoneno + ',' + this.countryID,
       'Email': this.email,
       'GenderID': this.gender,
       'Address': this.address,

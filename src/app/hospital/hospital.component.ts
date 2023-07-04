@@ -44,7 +44,7 @@ export class HospitalComponent implements OnInit {
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
-   // this.countryID = sessionStorage.getItem('CountryID');
+    this.countryID = sessionStorage.getItem('CountryID');
     this.GetCountry(this.languageid);
     this.getlanguage()
   }
@@ -56,10 +56,10 @@ export class HospitalComponent implements OnInit {
 
       })
     } else {
-      this.docservice.GetAdmin_HospitalClinicRegistration_LablesByCountryID(this.languageid).subscribe(data => {
-        this.labels = data;
-
-      })
+     this.docservice.GetAdmin_HospitalClinicRegistration_LablesByCountryID(this.languageid).subscribe(data => {
+         this.labels = data;
+ 
+       }) 
     }
   }
 
@@ -68,14 +68,14 @@ export class HospitalComponent implements OnInit {
     debugger
     var entity = {
       'HospitalName': this.hospitalname,
-      'HospitalPhoneNo': this.hospitalphoneno+ ',' + this.countryID,
+      'HospitalPhoneNo': this.hospitalphoneno + ',' + this.countryID,
       'ContactpersonName': this.contactpersonname,
       'ContatcpersonPhoneNo': this.contatcpersonphoneno,
       'EmailID': this.emailid,
       'Address': this.address,
       'Website': this.website,
       'HospitalClinicID': 1,
-      'RegID': this.loginid ,
+      'RegID': this.loginid,
       'Zipcode': this.zipcode,
       'Open24Hrs': this.open24hrs,
       'YearEstablished': this.yearestablished,

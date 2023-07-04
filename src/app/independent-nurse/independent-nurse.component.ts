@@ -50,7 +50,7 @@ export class IndependentNurseComponent implements OnInit {
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
- //   this.countryID = sessionStorage.getItem('CountryID');
+   this.countryID = sessionStorage.getItem('CountryID');
     this.getdepartmentmaster();
     this.GetCountry(this.languageid);
     if (this.countryID == 1) {
@@ -64,14 +64,14 @@ export class IndependentNurseComponent implements OnInit {
         }
       )
     } else {
-      this.docservice.GetAdmin_NurseRegistration_labelByLanguageIDByCountryID(this.languageid).subscribe(
+    this.docservice.GetAdmin_NurseRegistration_labelByLanguageIDByCountryID(this.languageid).subscribe(
         data => {
 
           this.labels = data;
 
         }, error => {
         }
-      )
+      ) 
     }
     this.GetSpecilizationmaster(this.languageid)
   }

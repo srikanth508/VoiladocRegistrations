@@ -55,14 +55,14 @@ export class PharmacyComponent implements OnInit {
         }
       )
     } else {
-      this.docservice.GetAdmin_PharmacyRegistration_LabelByLanguageIDByCountryID(this.languageid).subscribe(
+     this.docservice.GetAdmin_PharmacyRegistration_LabelByLanguageIDByCountryID(this.languageid).subscribe(
         data => {
 
           this.labels = data;
 
         }, error => {
         }
-      )
+      ) 
     }
   }
 
