@@ -135,7 +135,7 @@ export class IndependentDocotorComponent implements OnInit {
         'Identityproof': this.identityproofurl,
         'DegreeID': this.degreeid,
         'Colleage': this.colleagename + ',' + this.yearOfPassing,
-        'RegistrationNumber': this.regno + ',' +  Number(this.countryID),
+        'RegistrationNumber': this.regno + ',' +  Number(this.countryID=='maroc'?'1':'2'),
         'RegistrationCouncil': this.regcouncil,
         'MedicalRegProof': this.medicalregproof,
         'Pincode': this.zipcode,
@@ -216,7 +216,7 @@ export class IndependentDocotorComponent implements OnInit {
 
   public GetCountry(LanguageID) {
     debugger
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
         this.countrylist = data;
       })

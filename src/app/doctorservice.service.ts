@@ -52,7 +52,7 @@ export class DoctorserviceService {
   }
 
   public GetDepartmentMasterByLanguageID(lid) {
-    if (sessionStorage.getItem('CountryID') == '1') {
+    if (sessionStorage.getItem('CountryID') == 'maroc') {
       return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetDepartmentMasterByLanguageID?LanguageID=' + lid);
     } {
       return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetDepartmentMasterByLanguageID?LanguageID=' + lid);
@@ -132,7 +132,7 @@ export class DoctorserviceService {
     return this.http.post(this.host1 + '/Master/UploadHospitalImages/', formdata);
   }
   public GetSpecilaizationMaster(lid) {
-    if (sessionStorage.getItem('CountryID') == '1') {
+    if (sessionStorage.getItem('CountryID') == 'maroc') {
       return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetSpecilaizationMasterByLanguageID?LanguageID=' + lid);
     } else {
       return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetSpecilaizationMasterByLanguageID?LanguageID=' + lid);
@@ -140,7 +140,7 @@ export class DoctorserviceService {
   }
 
   public GetDoctorTypeMaster(lid) {
-    if (sessionStorage.getItem('CountryID') == '1') {
+    if (sessionStorage.getItem('CountryID') == 'maroc') {
       return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetDoctorTypeMasterByLanguageID?LanguageID=' + lid);
     } {
       return this.http.get<any[]>(this.host2 + '/ServiceMaster/GetDoctorTypeMasterByLanguageID?LanguageID=' + lid);
@@ -153,7 +153,7 @@ export class DoctorserviceService {
   }
 
   public GetHospital_Clinic(did) {
-    if (sessionStorage.getItem('CountryID') == '1') {
+    if (sessionStorage.getItem('CountryID') == 'maroc') {
       return this.http.get<any[]>(this.host1 + '/Hospital/GetHospital_ClinicForAdminByAdmin?LanguageID=' + did);
     } {
       return this.http.get<any[]>(this.host2 + '/Hospital/GetHospital_ClinicForAdminByAdmin?LanguageID=' + did);
@@ -161,7 +161,7 @@ export class DoctorserviceService {
   }
 
   public GetDegreeMaster(lid) {
-    if (sessionStorage.getItem('CountryID') == '1') {
+    if (sessionStorage.getItem('CountryID') == 'maroc') {
       return this.http.get<any[]>(this.host1 + '/ServiceMaster/GetDegreeMasterBylanguageID?LanguageID=' + lid);
     }
     {
@@ -184,7 +184,7 @@ export class DoctorserviceService {
     for (let i = 0; i < files.length; i++) {
       formdata.append('file_upload', files[i], files[i].name);
     }
-    if (sessionStorage.getItem('CountryID') == '1') {
+    if (sessionStorage.getItem('CountryID') == 'maroc') {
       return this.http.post(this.host1 + '/Doctor/PhotoUpload/', formdata);
     } else {
       return this.http.post(this.host2 + '/Doctor/PhotoUpload/', formdata);
@@ -196,7 +196,7 @@ export class DoctorserviceService {
   //labels
 
   public GetAdmin_Doctorregistration_LabelsByLanguageID(lid) {
-    if (sessionStorage.getItem('CountryID') == '1') {
+    if (sessionStorage.getItem('CountryID') == 'maroc') {
       return this.http.get<any[]>(this.host1 + '/LanguageMaster/GetAdmin_Doctorregistration_LabelsByLanguageID?LanguageID=' + lid);
     }
     else {
@@ -269,7 +269,7 @@ export class DoctorserviceService {
   }
 
   public Authenicate(data) {
-    if (sessionStorage.getItem('CountryID') == '1') {
+    if (sessionStorage.getItem('CountryID') == 'maroc') {
       this.url = this.host1 + '/Doctor/Authenicate';
       return this.http.post(this.url, data)
     }

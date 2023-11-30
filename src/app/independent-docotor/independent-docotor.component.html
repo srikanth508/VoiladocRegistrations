@@ -3,7 +3,7 @@
     <form #doctorform="ngForm">
         <div class="row headdiv">
             <div class="col-lg-12">
-                <h4 style="float: left;">{{labels[0].doctorRegistration}}</h4>
+                <h4 style="float: left;">{{labels[0]?.doctorRegistration}}</h4>
             </div>
         </div>
         <br>
@@ -82,7 +82,7 @@
                 <span style="color: red;">*</span>
             </div>
             <div class="col-lg-4">
-                <textarea rows="4" class="form-control" required placeholder="{{labels[0].address}}"
+                <textarea rows="4" class="form-control"  placeholder="{{labels[0].address}}"
                     [(ngModel)]="Address" name="Address"></textarea>
             </div>
         </div>
@@ -90,10 +90,10 @@
         <div class="row">
             <div class="col-lg-3">
                 <label>{{labels[0].speaklanguages}} :</label>
-                <span style="color: red;">*</span>
+                <!-- <span style="color: red;">*</span> -->
             </div>
             <div class="col-lg-4">
-                <input type="text" class="form-control" required placeholder="{{labels[0].speaklanguages}}"
+                <input type="text" class="form-control"  placeholder="{{labels[0].speaklanguages}}"
                     [(ngModel)]="speaklanguages" name="speaklanguages">
             </div>
         </div> <br>
@@ -141,7 +141,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <label>{{labels[0].country}} :</label>
-                <span style="color: red;">*</span>
+               <!--  <span style="color: red;">*</span> -->
             </div>
             <div class="col-lg-4">
                 <select class="form-control" (change)="GetCountryID($event)">
@@ -154,7 +154,7 @@
         <div class="row" *ngIf="doctortypeid!=2">
             <div class="col-lg-3">
                 <label>{{labels[0].province}} :</label>
-                <span style="color: red;">*</span>
+                <!-- <span style="color: red;">*</span> -->
             </div>
             <div class="col-lg-4">
                 <select class="form-control" (change)="GetProviceID($event)">
@@ -167,7 +167,7 @@
         <div class="row" *ngIf="doctortypeid!=2">
             <div class="col-lg-3">
                 <label>{{labels[0].city}}</label>
-                <span style="color: red;">*</span>
+                <!-- <span style="color: red;">*</span> -->
             </div>
             <div class="col-lg-4">
                 <select class="form-control" (change)="GetCityID($event)">
@@ -198,7 +198,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <label>{{labels[0].mallpractiece}} :</label>
-                <span style="color: red;">*</span>
+             <!--    <span style="color: red;">*</span> -->
             </div>
             <div class="col-lg-4">
                 <input type="radio" id="malpractice" name="malpractice" [(ngModel)]="malpractice" value="1">
@@ -211,7 +211,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <label>{{labels[0].referred}} :</label>
-                <span style="color: red;">*</span>
+              <!--   <span style="color: red;">*</span> -->
             </div>
             <div class="col-lg-4">
                 <input type="radio" id="reffereddoctor" name="reffereddoctor" [(ngModel)]="reffereddoctor" value="1">
@@ -225,7 +225,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <label>{{labels[0].photo}} : </label>
-                <span style="color: red;">*</span>
+               <!--  <span style="color: red;">*</span> -->
             </div>
             <div class="col-lg-4">
                 <ngx-dropzone [multiple]="false" style="height:100%" class="dropzone_vendorinvoice"
@@ -273,8 +273,8 @@
         <br>
         <div class="row">
             <div class="col-lg-3">
-                <label *ngIf="languageid=='1'">Hospital/Clinic/Independent doctor :</label>
-                <label *ngIf="languageid=='6'">Hôpital/Clinique/Médecin indépendant : </label>
+                <label *ngIf="languageid=='1'">Hospital/Clinic/Independent doctor <span style="color: red;">*</span> :</label> 
+                <label *ngIf="languageid=='6'">Hôpital/Clinique/Médecin indépendant : </label> <span style="color: red;">*</span>
             </div>
             <div class="col-lg-4">
                 <select class="form-control" (change)="GetHospitalClinicID($event)">
@@ -415,7 +415,7 @@
                 <label>{{labels[0].otherExperiences}} :</label>
             </div>
             <div class="col-lg-4">
-                <textarea rows="4" class="form-control" required placeholder="{{labels[0].otherExperiences}} "
+                <textarea rows="4" class="form-control"  placeholder="{{labels[0].otherExperiences}} "
                     [(ngModel)]="otherexperiences" name="otherexperiences"></textarea>
 
             </div>

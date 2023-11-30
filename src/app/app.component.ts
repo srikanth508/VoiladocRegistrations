@@ -28,7 +28,7 @@ export class AppComponent {
     this.username = localStorage.getItem('username');
     this.languageid = localStorage.getItem('LanguageID');
     this.countryCode = sessionStorage.getItem('CountryID');
-    if (this.countryCode == 2) {
+    if (this.countryCode == 'madagascar') {
       this.phonenumer = '+261 340795048';
     }
     else {
