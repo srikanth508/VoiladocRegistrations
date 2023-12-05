@@ -52,7 +52,7 @@ export class ClinicsComponent implements OnInit {
 
 
   public getlanguage() {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAdmin_HospitalClinicRegistration_Lables(this.languageid).subscribe(data => {
         this.labels = data;
 
@@ -72,7 +72,7 @@ export class ClinicsComponent implements OnInit {
     debugger
     var entity = {
       'HospitalName': this.clinicname,
-      'HospitalPhoneNo': this.clinicphoneno + ',' + this.countryID,
+      'HospitalPhoneNo': this.clinicphoneno + ',' +  Number(this.countryID=='maroc'?'1':'2'),
       'ContactpersonName': this.contactpersonname,
       'ContatcpersonPhoneNo': this.contatcpersonphoneno,
       'EmailID': this.emailid,
@@ -144,7 +144,7 @@ export class ClinicsComponent implements OnInit {
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
         this.provicelist = data;
       })
@@ -161,7 +161,7 @@ export class ClinicsComponent implements OnInit {
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
         this.citylist = data;
       })
@@ -190,7 +190,7 @@ export class ClinicsComponent implements OnInit {
       this.photourl = res;
       let a = this.photourl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;

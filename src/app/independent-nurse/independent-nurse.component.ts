@@ -53,7 +53,7 @@ export class IndependentNurseComponent implements OnInit {
    this.countryID = sessionStorage.getItem('CountryID');
     this.getdepartmentmaster();
     this.GetCountry(this.languageid);
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
 
       this.docservice.GetAdmin_NurseRegistration_labelByLanguageID(this.languageid).subscribe(
         data => {
@@ -95,7 +95,7 @@ export class IndependentNurseComponent implements OnInit {
     debugger
     var entity = {
       'NurseName': this.nursename,
-      'PhoneNo': this.phoneno + ',' + this.countryID,
+      'PhoneNo': this.phoneno + ',' +  Number(this.countryID=='maroc'?'1':'2'),
       'Email': this.email,
       'GenderID': this.gender,
       'Address': this.address,
@@ -157,7 +157,7 @@ export class IndependentNurseComponent implements OnInit {
 
 
   public GetCountry(LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
         this.countrylist = data;
       })
@@ -175,7 +175,7 @@ export class IndependentNurseComponent implements OnInit {
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
         this.provicelist = data;
       })
@@ -193,7 +193,7 @@ export class IndependentNurseComponent implements OnInit {
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
         this.citylist = data;
       })
@@ -234,7 +234,7 @@ export class IndependentNurseComponent implements OnInit {
       this.photourl = res;
       let a = this.photourl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;
@@ -266,7 +266,7 @@ export class IndependentNurseComponent implements OnInit {
       this.identityproofurl = res;
       let a = this.identityproofurl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;

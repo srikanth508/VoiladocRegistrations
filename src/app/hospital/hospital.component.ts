@@ -50,7 +50,7 @@ export class HospitalComponent implements OnInit {
   }
 
   public getlanguage() {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAdmin_HospitalClinicRegistration_Lables(this.languageid).subscribe(data => {
         this.labels = data;
 
@@ -68,7 +68,7 @@ export class HospitalComponent implements OnInit {
     debugger
     var entity = {
       'HospitalName': this.hospitalname,
-      'HospitalPhoneNo': this.hospitalphoneno + ',' + this.countryID,
+      'HospitalPhoneNo': this.hospitalphoneno + ',' +  Number(this.countryID=='maroc'?'1':'2'),
       'ContactpersonName': this.contactpersonname,
       'ContatcpersonPhoneNo': this.contatcpersonphoneno,
       'EmailID': this.emailid,
@@ -128,7 +128,7 @@ export class HospitalComponent implements OnInit {
   }
 
   public GetCountry(LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
         this.countrylist = data;
       })
@@ -148,7 +148,7 @@ export class HospitalComponent implements OnInit {
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
         this.provicelist = data;
       })
@@ -167,7 +167,7 @@ export class HospitalComponent implements OnInit {
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
         this.citylist = data;
       })
@@ -197,7 +197,7 @@ export class HospitalComponent implements OnInit {
       this.photourl = res;
       let a = this.photourl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;

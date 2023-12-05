@@ -34,15 +34,15 @@ export class DiagnosticCenterComponent implements OnInit {
   countrymanagerid: any;
   countryID: any;
   ngOnInit(): void {
-
+    this.countryID = sessionStorage.getItem('CountryID');
     this.loginid = localStorage.getItem('loginid')
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
     this.GetCountry(this.languageid);
-    this.countryID = sessionStorage.getItem('CountryID');
+ 
 
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAdmin_DiagnosticRegistration_LabelBYLanguageID(this.languageid).subscribe(
         data => {
 
@@ -69,7 +69,7 @@ export class DiagnosticCenterComponent implements OnInit {
 
 
   public GetCountry(LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
         this.countrylist = data;
       })
@@ -88,7 +88,7 @@ export class DiagnosticCenterComponent implements OnInit {
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
         this.provicelist = data;
       })
@@ -106,7 +106,7 @@ export class DiagnosticCenterComponent implements OnInit {
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
         this.citylist = data;
       })
@@ -130,7 +130,7 @@ export class DiagnosticCenterComponent implements OnInit {
   public Insertdetails() {
     var entity = {
       'DiagnosticCenterName': this.diagnosticcentername,
-      'BusinessPhoneNo': this.businessphno + ',' + this.countryID,
+      'BusinessPhoneNo': this.businessphno + ',' +  Number(this.countryID=='maroc'?'1':'2'),
       'ContactPersonName': this.contactpersonname,
       'ContactPersonPhNo': this.contatcpersonphoneno,
       'BusinessLicenceNumber': this.licenceno,
@@ -205,7 +205,7 @@ export class DiagnosticCenterComponent implements OnInit {
       this.photourl = res;
       let a = this.photourl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;

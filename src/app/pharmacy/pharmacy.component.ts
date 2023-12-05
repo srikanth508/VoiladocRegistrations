@@ -38,14 +38,15 @@ export class PharmacyComponent implements OnInit {
   countryID: any;
 
   ngOnInit(): void {
+    this.countryID = sessionStorage.getItem('CountryID');
     this.loginid = localStorage.getItem('loginid');
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
     this.GetCountry(this.languageid);
-    this.countryID = sessionStorage.getItem('CountryID');
+    
 
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAdmin_PharmacyRegistration_LabelByLanguageID(this.languageid).subscribe(
         data => {
 
@@ -71,7 +72,7 @@ export class PharmacyComponent implements OnInit {
       'PharmacyName': this.pharmacyname,
       'ContactPersonName': this.contactpersoname,
       'LicenceNumber': this.licenceno,
-      'PhoneNo': this.contatcpersonphoneno + ',' + this.countryID,
+      'PhoneNo': this.contatcpersonphoneno + ',' +  Number(this.countryID=='maroc'?'1':'2'),
       'EmailID': this.emailid,
       'Address': this.address,
       'Website': this.website,
@@ -117,7 +118,7 @@ export class PharmacyComponent implements OnInit {
 
 
   public GetCountry(LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
         this.countrylist = data;
       })
@@ -137,7 +138,7 @@ export class PharmacyComponent implements OnInit {
   }
 
   public GetProviceMaster(CountryID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
         this.provicelist = data;
       })
@@ -155,7 +156,7 @@ export class PharmacyComponent implements OnInit {
   }
 
   public GetCityMaster(ProvinceID, LanguageID) {
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
         this.citylist = data;
       })
@@ -197,7 +198,7 @@ export class PharmacyComponent implements OnInit {
       this.photourl = res;
       let a = this.photourl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;

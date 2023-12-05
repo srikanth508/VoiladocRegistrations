@@ -49,17 +49,18 @@ export class IndependenMidwifeComponent implements OnInit {
   countryID: any;
 
   ngOnInit(): void {
+    this.countryID = sessionStorage.getItem('CountryID');
     this.loginid = localStorage.getItem('loginid');
     this.languageid = localStorage.getItem('LanguageID');
     this.countryemail = localStorage.getItem('Email');
     this.countrymanagerid = localStorage.getItem('countrymanagerid');
     this.getdepartmentmaster();
     this.GetCountry(this.languageid);
-    this.countryID = sessionStorage.getItem('CountryID');
-    if (this.countryID == 1) {
+  
+    if (this.countryID == 'maroc') {
       this.docservice.GetAdmin_MidWifeRegistration_LabelByLanguageID(this.languageid).subscribe(
         data => {
-
+          
           this.labels = data;
 
         }, error => {
@@ -96,7 +97,7 @@ export class IndependenMidwifeComponent implements OnInit {
   public InsertedDetails() {
     var entity = {
       'MidwifeName': this.midwifename,
-      'PhoneNo': this.phoneno + ',' + this.countryID,
+      'PhoneNo': this.phoneno + ',' +  Number(this.countryID=='maroc'?'1':'2'),
       'Email': this.email,
       'GenderID': this.gender,
       'Address': this.address,
@@ -174,7 +175,7 @@ export class IndependenMidwifeComponent implements OnInit {
 
   public GetCountry(LanguageID) {
     debugger
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCountryMasterByLanguageID(LanguageID).subscribe(data => {
         this.countrylist = data;
       })
@@ -194,7 +195,7 @@ export class IndependenMidwifeComponent implements OnInit {
 
   public GetProviceMaster(CountryID, LanguageID) {
     debugger
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
         this.provicelist = data;
       })
@@ -213,7 +214,7 @@ export class IndependenMidwifeComponent implements OnInit {
 
   public GetCityMaster(ProvinceID, LanguageID) {
     debugger
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
         this.citylist = data;
       })
@@ -235,7 +236,7 @@ export class IndependenMidwifeComponent implements OnInit {
       this.photourl = res;
       let a = this.photourl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;
@@ -266,7 +267,7 @@ export class IndependenMidwifeComponent implements OnInit {
       this.identityproofurl = res;
       let a = this.identityproofurl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;

@@ -237,7 +237,7 @@ export class IndependentDocotorComponent implements OnInit {
 
   public GetProviceMaster(CountryID, LanguageID) {
     debugger
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetCityMasterBYIDandLanguageID(CountryID, LanguageID).subscribe(data => {
         this.provicelist = data;
       })
@@ -257,7 +257,7 @@ export class IndependentDocotorComponent implements OnInit {
 
   public GetCityMaster(ProvinceID, LanguageID) {
     debugger
-    if (this.countryID == 1) {
+    if (this.countryID == 'maroc') {
       this.docservice.GetAreaMasterByCityIDAndLanguageID(ProvinceID, LanguageID).subscribe(data => {
         this.citylist = data;
       })
@@ -356,7 +356,7 @@ export class IndependentDocotorComponent implements OnInit {
       this.identityproofurl = res;
       let a = this.identityproofurl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;
@@ -398,7 +398,7 @@ export class IndependentDocotorComponent implements OnInit {
       this.medicalregproof = res;
       let a = this.medicalregproof.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;
@@ -440,7 +440,7 @@ export class IndependentDocotorComponent implements OnInit {
       this.resumeurl = res;
       let a = this.resumeurl.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       }
       else {
@@ -482,7 +482,7 @@ export class IndependentDocotorComponent implements OnInit {
       this.docphoto = res;
       var b;
       let a = this.docphoto.slice(2);
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       }
       else {
@@ -522,7 +522,7 @@ export class IndependentDocotorComponent implements OnInit {
       this.signaturephoto = res;
       let a = this.signaturephoto.slice(2);
       var b;
-      if (this.countryID == 1) {
+      if (this.countryID == 'maroc') {
         b = 'https://maroc.voiladoc.org' + a;
       } else {
         b = 'https://madagascar.voiladoc-eastafrica.com' + a;
